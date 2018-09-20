@@ -1,0 +1,34 @@
+#ifndef _STRUCT_TAS_H
+#define _STRUCT_TAS_H
+
+#define N 10
+
+typedef struct{
+  int n;
+  int tab[K+2];
+  int M[K+1];
+  double f[K+1];
+} Tas;
+
+int plusPetitFils(Tas *t,int i);
+
+void init(Tas *t);
+void echanger(Tas *t,int j,int k);
+void monter(Tas *t,int j);
+
+//Acces au couple (f,i) de valeur f minimun:
+//(f,i)=(t->f[t->tab[1]],t->tab[1])
+
+void insert(Tas *t,double f,int i);
+
+//Test de présence d'un élément:
+//Si M[i]=0 -> élément absent
+//Sinon élément présent
+
+void supp(Tas *t,int i);
+
+//Pour supprimer l'élément de plus petite valeur f du tas t:
+//supp(t,t->tab[1]);
+
+#endif
+  

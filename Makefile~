@@ -1,0 +1,56 @@
+all: ChaineMain ReconstruitReseau MainGraphe Moulinette
+
+ChaineMain: ChaineMain.o Chaine.o entree_sortie.o SVGwriter.o
+	gcc -o ChaineMain ChaineMain.o Chaine.o entree_sortie.o SVGwriter.o -Wall -O
+
+ChaineMain.o: ChaineMain.c Chaine.h
+	gcc -c ChaineMain.c
+
+Chaine.o: Chaine.c Chaine.h entree_sortie.h SVGwriter.h	
+	gcc -c Chaine.c
+
+entree_sortie.o: entree_sortie.c entree_sortie.h
+	gcc -c entree_sortie.c
+
+SVGwriter.o: SVGwriter.c SVGwriter.h
+	gcc -c SVGwriter.c
+
+ReconstruitReseau: ReconstruitReseau.o Reseau.o Chaine.o  entree_sortie.o SVGwriter.o 
+	gcc -o RecontruitReseau ReconstruitReseau.o Reseau.o Chaine.o entree_sortie.o SVGwriter.o  -Wall -O
+
+ReconstruitReseau.o: ReconstruitReseau.c Reseau.h Chaine.h
+	gcc -c ReconstruitReseau.c
+
+Reseau.o: Reseau.c Reseau.h Chaine.h entree_sortie.h  SVGwriter.h
+	gcc -c Reseau.c
+
+MainGraphe: MainGraphe.o Graphe.o entree_sortie.o SVGwriter.o Struct_File.o NChaines.o Struct_Liste.o evaluation_NChaines.o
+	gcc -Wall -O -o MainGraphe MainGraphe.o Graphe.o entree_sortie.o SVGwriter.o Struct_File.o Struct_Liste.o NChaines.o evaluation_NChaines.o -lm 
+
+MainGraphe.o: MainGraphe.c Graphe.h NChaines.h
+	gcc -c MainGraphe.c
+
+Graphe.o: Graphe.c Graphe.h SVGwriter.h Struct_File.h Struct_Liste.h
+	gcc -c Graphe.c
+
+Struct_File.o: Struct_File.c Struct_File.h
+	gcc -c Struct_File.c
+
+Struct_Liste.o: Struct_Liste.c Struct_Liste.h
+	gcc -c Struct_Liste.c
+
+NChaines.o: NChaines.h NChaines.c Graphe.h Struct_File.h evaluation_NChaines.h
+	gcc -c NChaines.c
+
+evaluation_NChaines.o: evaluation_NChaines.c evaluation_NChaines.h
+	gcc -c evaluation_NChaines.c
+
+Moulinette: Moulinette.o Graphe.o entree_sortie.o SVGwriter.o Struct_File.o NChaines.o Struct_Liste.o evaluation_NChaines.o
+	gcc -Wall -O -o Moulinette Moulinette.o Graphe.o entree_sortie.o SVGwriter.o Struct_File.o Struct_Liste.o NChaines.o evaluation_NChaines.o -lm 
+
+Moulinette.o: Moulinette.c Graphe.h NChaines.h
+	gcc -c Moulinette.c
+
+
+clean: 
+	rm -fr ChaineMain MainGraphe RecontruitReseau Moulinette *.o

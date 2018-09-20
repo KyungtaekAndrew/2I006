@@ -1,0 +1,6 @@
+plot "TempsCalculReseauHachage.txt" using 1:2 with lines
+replot "TempsCalculReseauArbre.txt" using 1:2 with lines
+set term postscript portrait
+set output "TempsCalcul.ps"
+set size 0.7, 0.7
+replot
